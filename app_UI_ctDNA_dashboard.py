@@ -500,15 +500,16 @@ max_followup = float(times_grid.max())
 risk_pct = risk_percentile(risk)
 
 # ============================================================
-# Top Summary
+# Top Summary (FIXED: no open/close div across Streamlit calls)
 # ============================================================
 st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 summary_left, summary_right = st.columns([1.15, 0.85], gap="large")
 
+# ---------- LEFT CARD (single HTML block; no metric_card calls) ----------
 with summary_left:
     st.markdown(
-        """
+        f"""
         <div class="card">
           <div class="cardHeader">
             <div>
@@ -520,26 +521,25 @@ with summary_left:
               Liquid biopsy
             </span>
           </div>
+
+          <div style="display:flex; gap:16px; margin-top:14px;">
+            <div class="metricCard" style="flex:1;">
+              <div class="metricLabel">Risk band</div>
+              <div class="metricValue">{band_color(band)} {band}</div>
+              <div class="metricSub">Risk percentile: {risk_pct:.0f}th (vs training cohort)</div>
+            </div>
+
+            <div class="metricCard" style="flex:1;">
+              <div class="metricLabel">Estimated Survival Time</div>
+              <div class="metricValue">{format_median(median, max_followup)}</div>
+            </div>
+          </div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
 
-    m1, m2 = st.columns([1, 1], gap="large")
-    with m1:
-        metric_card(
-            label="Risk band",
-            value=f"{band_color(band)} {band}",
-            sub=f"Risk percentile: {risk_pct:.0f}th (vs training cohort)",
-        )
-    
-    with m2:
-        metric_card(
-            label="Estimated Survival Time",
-            value=format_median(median, max_followup),
-        )
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
+# ---------- RIGHT CARD (yours is already correct) ----------
 with summary_right:
     st.markdown(
         f"""
