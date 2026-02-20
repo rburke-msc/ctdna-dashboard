@@ -391,7 +391,7 @@ st.markdown(
       Breast Cancer Patient Monitoring
     </div>
     <div style="margin-top:8px; font-size:14px; color:rgba(15,23,42,0.64); max-width:920px; line-height:1.45;">
-      Predicts patient survival time using liquid biopsy markers (ctDNA mutation group, MAF, CTCs) and patient age.
+      Liquid biopsy-based survival modeling using ctDNA and CTCs.
     </div>
   </div>
 
@@ -400,9 +400,6 @@ st.markdown(
       <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
       Prototype • Research-use only
     </span>
-    <div style="font-size:12px; color:rgba(15,23,42,0.55); text-align:right;">
-      Not validated for clinical decision-making
-    </div>
   </div>
 </div>
 """,
@@ -515,8 +512,8 @@ with summary_left:
         <div class="card">
           <div class="cardHeader">
             <div>
-              <div class="cardTitle">Clinical Summary</div>
-              <div class="cardNote">Risk stratification and survival estimate for the current inputs.</div>
+              <div class="cardTitle">Patient Risk Profile</div>
+              <div class="cardNote">Risk level and estimated survival time.</div>
             </div>
             <span class="pill badgeAccent">
               <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
@@ -533,17 +530,13 @@ with summary_left:
             label="Risk band",
             value=f"{band_color(band)} {band}",
             sub=f"Risk percentile: {risk_pct:.0f}th (vs training cohort)",
-            pill_text="Cohort-relative",
-            pill_color="rgba(15,23,42,0.45)",
         )
+    
     with m2:
         metric_card(
             label="Estimated Survival Time",
             value=format_median(median, max_followup),
             sub="Median OS estimate from the cohort survival model",
-            pill_text=f"Max follow-up ~{int(max_followup)} {TIME_UNIT}",
-            pill_color="rgba(255,77,166,0.85)",
-            pill_class="badgeAccent",
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -555,7 +548,6 @@ with summary_right:
           <div class="cardHeader">
             <div>
               <div class="cardTitle">Model context</div>
-              <div class="cardNote">How does the model make decisions?.</div>
             </div>
             <span class="pill">
               <span class="dot" style="background:{band_hex(band)};"></span>
@@ -564,7 +556,7 @@ with summary_right:
           </div>
 
           <div style="font-size:13px; color:rgba(15,23,42,0.74); margin-top:2px; line-height:1.35;">
-            Outputs are determined using <b>liquid biopsy data only</b> (blood test):
+            Outputs based on <b>liquid biopsy biomarkers</b> (blood-derived):
           </div>
 
           <ul style="margin:12px 0 12px 0; padding-left:18px; color:rgba(15,23,42,0.62); font-size:13px; line-height:1.5;">
