@@ -500,46 +500,51 @@ max_followup = float(times_grid.max())
 risk_pct = risk_percentile(risk)
 
 # ============================================================
-# Top Summary (FIXED: no open/close div across Streamlit calls)
+# Top Summary
 # ============================================================
 st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 summary_left, summary_right = st.columns([1.15, 0.85], gap="large")
 
-# ---------- LEFT CARD (single HTML block; no metric_card calls) ----------
 with summary_left:
     st.markdown(
-        f"""
+        """
         <div class="card">
           <div class="cardHeader">
             <div>
-              <div class="cardTitle">Patient Risk Profile</div>
-              <div class="cardNote">Risk level and estimated survival time.</div>
+              <div class="cardTitle">Clinical Summary</div>
+              <div class="cardNote">Risk stratification and survival estimate for the current inputs.</div>
             </div>
             <span class="pill badgeAccent">
               <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
               Liquid biopsy
             </span>
           </div>
-
-          <div style="display:flex; gap:16px; margin-top:14px;">
-            <div class="metricCard" style="flex:1;">
-              <div class="metricLabel">Risk band</div>
-              <div class="metricValue">{band_color(band)} {band}</div>
-              <div class="metricSub">Risk percentile: {risk_pct:.0f}th (vs training cohort)</div>
-            </div>
-
-            <div class="metricCard" style="flex:1;">
-              <div class="metricLabel">Estimated Survival Time</div>
-              <div class="metricValue">{format_median(median, max_followup)}</div>
-            </div>
-          </div>
-        </div>
         """,
         unsafe_allow_html=True,
     )
 
-# ---------- RIGHT CARD (yours is already correct) ----------
+    m1, m2 = st.columns([1, 1], gap="large")
+    with m1:
+        metric_card(
+            label="Risk band",
+            value=f"{band_color(band)} {band}",
+            sub=f"Risk percentile: {risk_pct:.0f}th (vs training cohort)",
+            pill_text="Cohort-relative",
+            pill_color="rgba(15,23,42,0.45)",
+        )
+    with m2:
+        metric_card(
+            label="Estimated Survival Time",
+            value=format_median(median, max_followup),
+            sub="Median OS estimate from the cohort survival model",
+            pill_text=f"Max follow-up ~{int(max_followup)} {TIME_UNIT}",
+            pill_color="rgba(255,77,166,0.85)",
+            pill_class="badgeAccent",
+        )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
 with summary_right:
     st.markdown(
         f"""
@@ -547,6 +552,7 @@ with summary_right:
           <div class="cardHeader">
             <div>
               <div class="cardTitle">Model context</div>
+              <div class="cardNote">How does the model make decisions?.</div>
             </div>
             <span class="pill">
               <span class="dot" style="background:{band_hex(band)};"></span>
@@ -555,7 +561,7 @@ with summary_right:
           </div>
 
           <div style="font-size:13px; color:rgba(15,23,42,0.74); margin-top:2px; line-height:1.35;">
-            Outputs based on <b>liquid biopsy biomarkers</b> (blood-derived):
+            Outputs are determined using <b>liquid biopsy data only</b> (blood test):
           </div>
 
           <ul style="margin:12px 0 12px 0; padding-left:18px; color:rgba(15,23,42,0.62); font-size:13px; line-height:1.5;">
@@ -572,7 +578,7 @@ with summary_right:
         """,
         unsafe_allow_html=True,
     )
-
+    
 # ============================================================
 # Main Content (Tabs)
 # ============================================================
