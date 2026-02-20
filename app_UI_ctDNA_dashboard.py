@@ -526,7 +526,7 @@ with summary_left:
         metric_card(
             label="Risk band",
             value=f"{band_color(band)} {band}",
-            sub=f"Risk percentile: {risk_pct:.0f}th (vs training cohort)",
+            sub=f"Risk percentile: {risk_pct:.0f}th",
             pill_text="Cohort-relative",
             pill_color="rgba(15,23,42,0.45)",
         )
