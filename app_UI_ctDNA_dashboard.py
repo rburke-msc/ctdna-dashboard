@@ -534,7 +534,7 @@ with summary_left:
         metric_card(
             label="Estimated Survival Time",
             value=format_median(median, max_followup),
-            sub="",
+            sub="...",
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
