@@ -510,7 +510,7 @@ with summary_left:
           <div class="cardHeader">
             <div>
               <div class="cardTitle">Clinical Summary</div>
-              <div class="cardNote">Liquid biopsy-based survival modeling using ctDNA and CTCs.</div>
+              <div class="cardNote">Liquid biopsy-based survival modeling (ctDNA).</div>
             </div>
             <span class="pill badgeAccent">
               <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
