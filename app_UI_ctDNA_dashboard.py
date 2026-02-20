@@ -538,6 +538,8 @@ with summary_left:
             value=format_median(median, max_followup),
         )
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
 with summary_right:
     st.markdown(
         f"""
