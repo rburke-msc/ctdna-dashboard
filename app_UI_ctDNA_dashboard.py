@@ -513,7 +513,6 @@ with summary_left:
           <div class="cardHeader">
             <div>
               <div class="cardTitle">Clinical Summary</div>
-              <div class="cardNote">Risk stratification and survival estimate for the current inputs.</div>
             </div>
             <span class="pill badgeAccent">
               <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
