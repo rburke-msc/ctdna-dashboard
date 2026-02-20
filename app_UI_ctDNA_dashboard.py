@@ -390,9 +390,6 @@ st.markdown(
       letter-spacing:-0.03em; line-height:1.08;">
       Breast Cancer Patient Monitoring
     </div>
-    <div style="margin-top:8px; font-size:14px; color:rgba(15,23,42,0.64); max-width:920px; line-height:1.45;">
-      Liquid biopsy-based survival modeling using ctDNA and CTCs.
-    </div>
   </div>
 
   <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end; margin-top:2px;">
@@ -513,6 +510,7 @@ with summary_left:
           <div class="cardHeader">
             <div>
               <div class="cardTitle">Clinical Summary</div>
+              <div class="cardNote">Liquid biopsy-based survival modeling using ctDNA and CTCs.</div>
             </div>
             <span class="pill badgeAccent">
               <span class="dot" style="background:rgba(255,77,166,0.95);"></span>
@@ -547,8 +545,7 @@ with summary_right:
         <div class="card">
           <div class="cardHeader">
             <div>
-              <div class="cardTitle">Model context</div>
-              <div class="cardNote">How does the model make decisions?.</div>
+              <div class="cardTitle">Model Explanation</div>
             </div>
             <span class="pill">
               <span class="dot" style="background:{band_hex(band)};"></span>
@@ -557,7 +554,7 @@ with summary_right:
           </div>
 
           <div style="font-size:13px; color:rgba(15,23,42,0.74); margin-top:2px; line-height:1.35;">
-            Outputs are determined using <b>liquid biopsy data only</b> (blood test):
+            Outputs based on <b>liquid biopsy biomarkers</b> (blood-derived):
           </div>
 
           <ul style="margin:12px 0 12px 0; padding-left:18px; color:rgba(15,23,42,0.62); font-size:13px; line-height:1.5;">
