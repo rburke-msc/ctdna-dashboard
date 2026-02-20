@@ -538,9 +538,6 @@ with summary_left:
             label="Estimated Survival Time",
             value=format_median(median, max_followup),
             sub="Median OS estimate from the cohort survival model",
-            pill_text=f"Max follow-up ~{int(max_followup)} {TIME_UNIT}",
-            pill_color="rgba(255,77,166,0.85)",
-            pill_class="badgeAccent",
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
